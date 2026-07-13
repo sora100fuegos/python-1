@@ -276,7 +276,7 @@ def main():
                             st.write(f"- {diag}")
                         
                         # Nivel de riesgo
-                        st.markdown("### ⚠️ Nivel de Riesgo")
+                        st.markdown("### ⚠️ Nivel de Riesgo ")
                         risk_color = "🔴" if "ALTO" in results['nivel_riesgo'] else "🟡" if "MODERADO" in results['nivel_riesgo'] else "🟢"
                         st.markdown(f"**{risk_color} {results['nivel_riesgo']}**")
                         
