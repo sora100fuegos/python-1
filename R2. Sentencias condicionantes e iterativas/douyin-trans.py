@@ -13,7 +13,7 @@ import time
 # ============================================================
 st.set_page_config(page_title="🎬 Douyin Translator", layout="wide")
 st.title("🎬 Traductor de Videos de Douyin")
-st.markdown("Sube la URL de un video de Douyin, extrae el audio, transcríbelo y tradúcelo al inglés.")
+st.markdown("Sube la URL de un video de Douyin , extrae el audio, transcríbelo y tradúcelo al inglés.")
 
 # ============================================================
 # FUNCIONES AUXILIARES
