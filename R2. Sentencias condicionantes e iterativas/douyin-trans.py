@@ -93,9 +93,9 @@ def extraer_audio(video_path, audio_path):
         # [Condicional 12: elif]
         elif video.duration > 180:
             st.warning("⚠️ Video muy largo (>3 min). Procesando solo los primeros 3 minutos.")
-            video = video.subclip(0, 180)
+            video = video.subclipped(0, 180)
         
-        video.audio.write_audiofile(audio_path, fps=16000, nbytes=2, codec='pcm_s16le', verbose=False, logger=None)
+        video.audio.write_audiofile(audio_path, fps=16000, nbytes=2, codec='pcm_s16le')
         video.close()
         return True, "Audio extraído correctamente."
     except Exception as e:
