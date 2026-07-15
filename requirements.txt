@@ -3,6 +3,5 @@ requests
 beautifulsoup4
 yt_dlp
 MoviePy
-whisper
 deep_translator
 openai-whisper
