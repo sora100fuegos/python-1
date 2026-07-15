@@ -303,4 +303,4 @@ if st.button("Iniciar Pruebas"):
 
             # Mensaje de éxito de la auditoría
             st.balloons()
-            st.success("¡Pruebas y auditoría de calidad completadas con éxito!")
+            st.success("¡Pruebas y auditoría de calidad completadas con éxito! ")
