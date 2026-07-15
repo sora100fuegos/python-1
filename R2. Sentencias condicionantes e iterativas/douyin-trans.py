@@ -3,7 +3,7 @@ import yt_dlp
 import os
 import re
 import tempfile
-from moviepy.editor import VideoFileClip
+from moviepy import VideoFileClip
 import whisper
 from deep_translator import GoogleTranslator
 import time
