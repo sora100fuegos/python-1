@@ -5,3 +5,4 @@ yt_dlp
 MoviePy
 deep_translator
 openai-whisper
+ffmpeg
