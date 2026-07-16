@@ -45,6 +45,7 @@ def descargar_video_douyin(url, output_path):
         return None, "URL no proporcionada."
     
     ydl_opts = {
+        'cookiefile': "cookies.txt",
         'outtmpl': output_path,
         'format': 'bestvideo+bestaudio/best',
         'quiet': True,
