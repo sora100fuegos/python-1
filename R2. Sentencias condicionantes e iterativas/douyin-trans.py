@@ -49,6 +49,13 @@ def descargar_video_douyin(url, output_path):
         'format': 'bestvideo+bestaudio/best',
         'quiet': True,
         'no_warnings': True,
+        'rm_cachedir': True,
+        'extractor_args': {
+        'youtube': {
+            'player_client': ['android', 'ios']
+        }
+    },
+    
     }
     
     try:
