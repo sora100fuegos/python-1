@@ -46,8 +46,9 @@ def descargar_video_douyin(url, output_path):
     
     ydl_opts = {
         'outtmpl': output_path,
-        'format': 'best[height<=720]',
+        'format': 'bestvideo+bestaudio/best',
         'quiet': True,
+        'ignoreerrors': True,
         'no_warnings': True,
     }
     
