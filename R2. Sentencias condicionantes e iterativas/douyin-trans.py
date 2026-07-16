@@ -48,7 +48,6 @@ def descargar_video_douyin(url, output_path):
         'outtmpl': output_path,
         'format': 'bestvideo+bestaudio/best',
         'quiet': True,
-        'ignoreerrors': True,
         'no_warnings': True,
     }
     
