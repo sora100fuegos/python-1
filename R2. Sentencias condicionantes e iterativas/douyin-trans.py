@@ -489,6 +489,78 @@ if procesar:
                 mime="text/plain"
             )
 
+            print("\n2. Recorrer lista:")
+            frutas = ["manzana", "plátano", "cereza"]
+            for fruta in frutas:
+                    print(f"   Me gusta la {fruta}")
+            print("\n3. Uso de enumerate:")
+
+            tareas = ["Diseñar UI", "Escribir código", "Hacer pruebas"]
+            for indice, tarea in enumerate(tareas, start=1):
+                print(f"   Tarea {indice}: {tarea}")
+            
+            print("\n4. Iteración paralela con zip:")
+            nombres = ["Ana", "Luis"]
+            roles = ["Dev", "QA"]
+            for nombre, rol in zip(nombres, roles):
+                print(f"   {nombre} trabaja como {rol}")
+
+
+            print("\n5. Diccionarios con .items():")
+            precios = {"Laptop": 800, "Mouse": 20}
+            for producto, precio in precios.items():
+                print(f"   {producto} cuesta ${precio}")
+            
+            print("\n6. While con contador básico:")
+            contador = 0
+            while contador < 3:
+                print(f"   Contador en: {contador}")
+                contador += 1
+            print("\n7. While Infinito controlado con 'break':")
+
+            intentos = 0
+            while True:
+                intentos += 1
+                print(f"   Intento número {intentos}...")
+                if intentos >= 3:
+                    print("   ¡Límite alcanzado! Saliendo...")
+                    break
+            print("\n8. While basado en el estado de una lista:")
+            cola_trabajo = ["Tarea A", "Tarea B"]
+            while cola_trabajo:
+                actual = cola_trabajo.pop(0)  # Remueve el primer elemento
+           
+            print(f"   Procesando: {actual}")
+            print("\n9. Comprensión de listas:")
+            numeros = [1, 2, 3]
+            cuadrados = [x**2 for x in numeros]
+            print(f"   Resultado: {cuadrados}")
+
+            print("\n10. Uso de map() con lambda:")
+            precios_usd = [10, 20, 30]
+            # Convertimos a string con formato de moneda
+            precios_formateados = list(map(lambda p: f"${p}.00", precios_usd))
+            print(f"   Precios: {precios_formateados}")
+            print("\n11. Cuenta regresiva por recursividad:")
+
+            def cuenta_regresiva(n):
+                if n <= 0:
+                    print("   ¡Despegue! 🚀")
+                else:
+                    print(f"   {n}...")
+                    cuenta_regresiva(n - 1)  # Llamada recursiva
+
+            cuenta_regresiva(3)
+
+            capitales = {"México": "CDMX", "España": "Madrid", "Francia": "París"}
+            print("\n3. Diccionario (clave-valor):")
+            for pais, capital in capitales.items():
+                print(f"   La capital de {pais} es {capital}")
+            
+            print("\n10. Iteración inversa:")
+            for num in reversed([1, 2, 3]):
+                print(f"   Cuenta regresiva: {num}")
+
 else:
     # Estado inicial
     st.info("👈 Ingresa una URL de Douyin/TikTok en la barra lateral y presiona 'Procesar Video'")
@@ -516,3 +588,5 @@ else:
     - Algunos videos pueden tener restricciones geográficas.
     - El procesamiento puede tardar varios minutos según la duración.
     """)
+
+ 
