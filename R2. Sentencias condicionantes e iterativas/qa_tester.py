@@ -228,8 +228,38 @@ if st.button("Iniciar Pruebas"):
                 # Condicional 21 (if)
                 if src:
                     pass
+            inputs = soup.find_all(['input', 'textarea', 'select'])
+            inputs_without_label = 0
 
-            # Iteración 13 (for-in)
+            # Iteración (for-in)
+            for input_tag in inputs:
+            # Condicional (if) - Omitimos los botones de envío y campos ocultos
+                if input_tag.get('type') not in ['submit', 'hidden', 'button']:
+                    input_id = input_tag.get('id')
+                    aria_label = input_tag.get('aria-label')
+                    has_label = False
+            
+            # Condicional (if) - Si tiene un ID, buscamos si hay un <label for="ID">
+                if input_id:
+                    label = soup.find('label', attrs={"for": input_id})
+                    # Condicional (if)
+                    if label:
+                     has_label = True
+                
+            # Condicional (if-else)
+                    if has_label or aria_label:
+                        pass  # El input es accesible
+                    else:
+                        name_or_id = input_id or input_tag.get('name') or "campo sin id/nombre"
+                        st.warning(f"📝 Campo de entrada desprotegido: El campo '{name_or_id}' no tiene una etiqueta descriptiva <label> asociada.")
+                        inputs_without_label += 1
+
+                        # Condicional (if-else)
+                    if inputs_without_label == 0:
+                            st.success("✔️ Todos los campos de formulario son accesibles e identificables.")
+                    else:
+                            st.error(f"❌ Se detectaron {inputs_without_label} campos de formulario inaccesibles.")
+                        # Iteración 13 (for-in)
             for style in soup.find_all('style')[:3]:
                 pass
 
@@ -277,16 +307,75 @@ if st.button("Iniciar Pruebas"):
             for section in soup.find_all('section')[:3]:
                 pass
 
-            # Estructuras iterativas de tipo While para completar el conteo (Mínimo 25 en total)
-            iter_while_1 = 0
-            # Iteración 24 (while)
-            while iter_while_1 < 2:
-                iter_while_1 += 1
+            required_og_tags = ['og:title', 'og:description', 'og:image', 'og:url']
+            missing_og_tags = []
 
-            iter_while_2 = 0
-            # Iteración 25 (while)
-            while iter_while_2 < 1:
-                iter_while_2 += 1
+            for og_property in required_og_tags:
+                og_tag = soup.find('meta', property=og_property)
+                if not og_tag or not og_tag.get('content'):
+                    missing_og_tags.append(og_property)
+
+            if not missing_og_tags:
+                st.success("✔️ El sitio cuenta con todas las etiquetas Open Graph básicas para redes sociales.")
+            else:
+                for missing in missing_og_tags:
+                    st.warning(f"📱 Falta la etiqueta meta de optimización social: `{missing}`")    
+
+            
+            form_inputs = soup.find_all('input')
+            missing_type_inputs = 0
+
+            for inp in form_inputs:
+                input_type = inp.get('type')
+                if not input_type:
+                    input_name = inp.get('name', 'sin-nombre')
+                    st.warning(f"📝 Campo `<input>` con el nombre '{input_name}' no tiene un atributo `type` definido.")
+                    missing_type_inputs += 1
+            if missing_type_inputs == 0:
+                st.success("✔️ Todos los campos de entrada de datos tienen su tipo configurado.")
+            else:
+                st.warning(f"⚠️ Se encontraron {missing_type_inputs} inputs confiando en el tipo por defecto.")
+                    
+            all_links = soup.find_all('a')
+            external_domains = set()
+
+            for link in all_links:
+                href = link.get('href', '')
+                if href.startswith('http') and urlparse(url_input).netloc != urlparse(href).netloc:
+                    external_domains.add(urlparse(href).netloc)
+
+            if external_domains:
+                st.info(f"Se detectaron conexiones externas a {len(external_domains)} dominios diferentes.")
+                for domain in external_domains:
+                    # Sugerir optimización en la iteración
+                    st.write(f"💡 Consejo: Considera añadir `<link rel='dns-prefetch' href='//{domain}'>` para mejorar la velocidad.")
+ 
+            text_containers = soup.find_all(['p', 'span', 'div'])
+            multilang_tags_count = 0
+
+            for container in text_containers:
+                lang_attr = container.get('lang')
+                if lang_attr:
+                    multilang_tags_count += 1
+
+            if multilang_tags_count > 0:
+                st.info(f"🌐 Localización: Se detectaron {multilang_tags_count} elementos que especifican explícitamente un idioma mediante el atributo `lang`.")
+            else:
+                st.write("ℹ️ El sitio no utiliza cambios de idioma locales en sus bloques de texto.")
+
+            paragraphs = soup.find_all('p')
+            long_paragraphs = 0
+
+            for p in paragraphs:
+                words = p.text.strip().split()
+                if len(words) > 250:
+                    st.warning(f"📖 Párrafo muy extenso detectado ({len(words)} palabras). Comienza con: *\"{ ' '.join(words[:10]) }...\"*")
+                    long_paragraphs += 1
+
+            if long_paragraphs == 0:
+                st.success("✔️ Distribución de texto óptima: Los párrafos tienen longitudes cómodas para el usuario.")
+            else:
+                st.info(f"💡 Se sugiere fragmentar los {long_paragraphs} párrafos largos identificados.")
 
             # Bloque de condicionales adicionales para asegurar la métrica exacta/superior a 25
             # Condicional 24 (if-else / elif)
