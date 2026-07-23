@@ -3,11 +3,16 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
+
 # ============================================================
 # 1. GENERACIÓN DE DATOS
 # ============================================================
-np.random.seed(42)  # Para reproducibilidad
-listaNumeros = np.random.normal(loc=5, scale=2, size=1000)
+
+def generar_num():
+    np.random.seed(42)  # Para reproducibilidad
+    return np.random.normal(loc=5, scale=2, size=1000)
+
 
 # ============================================================
 # 2. FUNCIONES ESTADÍSTICAS
@@ -45,7 +50,19 @@ st.set_page_config(page_title="Análisis Estadístico UVEG", layout="wide")
 st.title("📈 Medidas Estadísticas de Distribución")
 st.markdown("**Distribución Normal** — μ = 5, σ = 2, n = 1000")
 
+
+
+if "numeros" not in st.session_state:
+    st.session_state.numeros = generar_num()
+
+
+
+
+    
+listaNumeros = st.session_state.numeros
 # ---------- Histograma ----------
+
+
 fig, ax = plt.subplots(figsize=(10, 4))
 ax.hist(listaNumeros, bins=40, color="steelblue", edgecolor="white", alpha=0.85)
 ax.set_title("Histograma de la muestra")
