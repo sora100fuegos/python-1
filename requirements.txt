@@ -6,3 +6,4 @@ MoviePy
 deep_translator
 openai-whisper
 ffmpeg
+matplotlib
