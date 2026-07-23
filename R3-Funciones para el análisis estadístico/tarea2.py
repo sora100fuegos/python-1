@@ -43,6 +43,14 @@ def obtener_percentiles_extremos(arr):
     """Retorna los percentiles extremos: P2 y P98."""
     return np.percentile(arr, [2, 98])
 
+def ext_su(arr):
+    return np.percentile(arr,  98)
+
+def ext_inf(arr):
+    return np.percentile(arr,  2)
+
+
+
 # ============================================================
 # 3. APP STREAMLIT
 # ============================================================
@@ -57,8 +65,6 @@ if "numeros" not in st.session_state:
 
 
 
-
-    
 listaNumeros = st.session_state.numeros
 # ---------- Histograma ----------
 
@@ -76,6 +82,8 @@ mediana   = obtener_mediana(listaNumeros)
 cuartiles = obtener_cuartiles(listaNumeros)
 deciles   = obtener_deciles(listaNumeros)
 extremos  = obtener_percentiles_extremos(listaNumeros)
+extremo_inferior = ext_inf(listaNumeros)
+extremo_superior = ext_su(listaNumeros)
 
 # ---------- Promedio y Mediana ----------
 c1, c2 = st.columns(2)
